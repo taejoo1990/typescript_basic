@@ -118,7 +118,83 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"app.js":[function(require,module,exports) {
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+//about instance
 
+//traditional Methd - Javascript
+//メソッド名を大文字から始めて"new"インスタンスを使えるように意味を与える。
+//"new"を使わない場合、'this'がグローバル、windowにつなぐ問題がある、
+function CartV1() {
+  this.cart = [];
+  this.currentId = 0;
+}
+CartV1.prototype.getNewId = function () {
+  this.currentId++;
+  return this.currentId;
+};
+CartV1.createItem = function (name, price) {
+  return {
+    name: name,
+    price: price
+  };
+};
+CartV1.prototype.addItem = function (item) {
+  this.cart.push(_objectSpread(_objectSpread({}, item), {}, {
+    id: this.getNewId()
+  }));
+};
+CartV1.prototype.clearCart = function (item) {
+  this.cart = [];
+  this.currentId = 0;
+};
+//newを使って空いてるインスタンスを生成
+var cartV1 = new CartV1();
+cartV1.addItem(CartV1.createItem("スイカ", 1900));
+cartV1.addItem(CartV1.createItem("リンゴ", 200));
+cartV1.addItem(CartV1.createItem("バナナ", 100));
+
+//Clsssを使って方法
+var CartV2 = /*#__PURE__*/_createClass(function CartV2() {
+  var _this = this;
+  _classCallCheck(this, CartV2);
+  _defineProperty(this, "cart", void 0);
+  _defineProperty(this, "currentId", void 0);
+  _defineProperty(this, "getNewId", function () {
+    _this.currentId++;
+    return _this.currentId;
+  });
+  _defineProperty(this, "createItem", function (name, price) {
+    return {
+      name: name,
+      price: price
+    };
+  });
+  _defineProperty(this, "addItem", function (item) {
+    _this.cart.push(_objectSpread(_objectSpread({}, item), {}, {
+      id: _this.getNewId()
+    }));
+  });
+  _defineProperty(this, "clearCart", function (item) {
+    _this.cart = [];
+    _this.currentId = 0;
+  });
+  this.cart = [];
+  this.currentId = 0;
+}); //予約語"NEW"でインスタンス生成
+var cartV2 = new CartV2();
+cartV2.addItem(cartV2.createItem("スイカ", 1900));
+cartV2.addItem(cartV2.createItem("リンゴ", 200));
+cartV2.addItem(cartV2.createItem("バナナ", 100));
+console.log(cartV1);
+console.log(cartV2);
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -144,7 +220,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53613" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58067" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
