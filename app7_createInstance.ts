@@ -1,11 +1,21 @@
 //about instance
 
+type Item={
+    name : string,
+    price : number,
+    id ? : number
+}
+interface Cart{
+    cart : {},
+    currentId : number
+}
+
 //traditional Methd - Javascript
 //メソッド名を大文字から始めて"new"インスタンスを使えるように意味を与える。
 //"new"を使わない場合、'this'がグローバル、windowにつなぐ問題がある、
 function CartV1(){
-    this.cart = [];
-    this.currentId = 0;
+    this.cart  = [];
+    this.currentId= 0;
 }
 
 CartV1.prototype.getNewId = function(){
@@ -13,34 +23,34 @@ CartV1.prototype.getNewId = function(){
     return this.currentId;
 };
 
-CartV1.createItem = function(name,price){
+CartV1.createItem = function(name : string,price : number){
     return{
         name,
         price
     };
 };
 
-CartV1.prototype.addItem = function(item){
+CartV1.prototype.addItem = function(item : Item){
     this.cart.push({
         ...item,
         id: this.getNewId(),
     });
 };
 
-CartV1.prototype.clearCart = function(item){
+CartV1.prototype.clearCart = function(item : Item){
     this.cart = [];
     this.currentId = 0;
 }
 //newを使って空いてるインスタンスを生成
-const cartV1 = new CartV1();
+const cartV1  = new CartV1();
 cartV1.addItem(CartV1.createItem("スイカ",1900));
 cartV1.addItem(CartV1.createItem("リンゴ",200));
 cartV1.addItem(CartV1.createItem("バナナ",100));
 
 //Clsssを使って方法
 class CartV2{
-    cart;
-    currentId;
+    cart : Item[];
+    currentId : number;
     constructor(){
         this.cart = [];
         this.currentId = 0;
@@ -50,21 +60,21 @@ class CartV2{
         return this.currentId;
     };
     
-    createItem = (name, price) =>{
+    createItem = (name : string, price : number) =>{
         return {
             name,
             price
         }
     }
     
-    addItem = (item)=>{
+    addItem = (item : Item)=>{
             this.cart.push({
             ...item,
             id: this.getNewId(),
         })
         };
     
-    clearCart = (item) => {
+    clearCart = (item : Item) => {
         this.cart = [];
         this.currentId = 0;
     }

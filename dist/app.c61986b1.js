@@ -120,43 +120,36 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"app.ts":[function(require,module,exports) {
 "use strict";
 
-//reduce メソッド
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-    }
-    return t;
-  };
-  return __assign.apply(this, arguments);
-};
-var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var sum = numbers.reduce(function (a, b) {
-  return a + b;
-});
-var sumObjects = [{
-  English: "abcedfg..."
-}, {
-  Korean: "가나다라마바사..."
-}, {
-  japanese: "あいうえお..."
-}];
-var universityLanguage = sumObjects.reduce(function (a, b) {
-  return __assign(__assign({}, a), b);
-});
-function sumNumbers() {
-  var arg = [];
-  for (var _i = 0; _i < arguments.length; _i++) {
-    arg[_i] = arguments[_i];
+var Stu = /** @class */function () {
+  function Stu(name, year, cls) {
+    var _this = this;
+    //lexicalEnvirroment
+    this.getYaer = function () {
+      return _this.year;
+    };
+    this.name = name;
+    this.year = year;
+    this.cls = cls;
+    this.getCls = this.getCls.bind(this);
   }
-  return Array.from(arguments).reduce(function (a, b) {
-    return a + b;
-  }, 0);
-}
-console.log(universityLanguage);
-console.log(sum);
-console.log("sum : " + sumNumbers(10, 20, 30, 40, 50));
+  //non-lexicalEnvirroment
+  Stu.prototype.getName = function () {
+    return this.name;
+  };
+  Stu.prototype.getCls = function () {
+    return this.cls;
+  };
+  return Stu;
+}();
+var stu = new Stu("lee", 2, "A");
+console.log(stu.getName());
+var fnGetNmae = stu.getName;
+console.log(fnGetNmae.call(stu));
+//Excution Context -> 
+var fnGetYear = stu.getYaer;
+console.log(fnGetYear());
+var fnGetCls = stu.getCls;
+console.log(fnGetCls());
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -182,7 +175,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50121" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49408" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
