@@ -118,34 +118,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"app.js":[function(require,module,exports) {
-var c1 = {
-  name: 'C1',
-  color: 'red'
-};
-var c2 = {
-  name: 'C2',
-  width: 300
-};
-var c3 = {
-  name: 'C3',
-  height: 100
-};
-c1.__proto__ = c3;
-c3.__proto__ = c2;
-console.log(c1);
-console.log(c2);
-console.log(c3);
-console.log(c1.width);
-function Foo(name) {
-  this.name = name;
-  //this.__proto__ = this.prototype();
+function main() {
+  var BUBBLING_PHASE = false;
+  var CAPTURING_PHASE = true;
+  var PHASE_NAME = ['NONE', 'CAPTURING', 'TARGET', 'BUBBLING'];
+  function eventLogger(_ref) {
+    var target = _ref.target,
+      currentTarget = _ref.currentTarget;
+    console.log("".concat(target.dataset.name, ", ").concat(currentTarget.dataset.name, ",").concat(PHASE_NAME(eventPhase)));
+  }
+  var divs = document.querySelector('div');
+  divs.forEach(function (div) {
+    return div.addEventListener('click', eventLogger, BUBBLING_PHASE);
+  });
 }
-
-Foo.prototype.lastName = 'hey';
-var f = new Foo('Lee tae joo');
-console.log(f);
-console.log(f.name);
-console.log(f.lastName);
+document.addEventListener('DOMContentLoaded', main);
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -171,7 +158,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56365" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

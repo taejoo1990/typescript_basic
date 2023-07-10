@@ -28,7 +28,7 @@ class Person {
     this.age = age;
     this.getAge = this.getAge.bind(this);
   }
-
+  //lexical context
   getName=()=>this.name;
   getAge(){
     return this.age;
@@ -42,5 +42,7 @@ class Person {
   console.log(myAge.call(p1));
 
   const myName = p1.getName;
-  console.log(myName()); //constructorでbindしているので実行可能
+  console.log(p1.getName());
+  console.log(myName()); //Arrowメソッドの場合thisがさすオブジェクトを指定しなくても大丈夫
+  console.log(myName.call(p1));
   

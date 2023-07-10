@@ -120,36 +120,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"app.ts":[function(require,module,exports) {
 "use strict";
 
-var Stu = /** @class */function () {
-  function Stu(name, year, cls) {
-    var _this = this;
-    //lexicalEnvirroment
-    this.getYaer = function () {
-      return _this.year;
-    };
-    this.name = name;
-    this.year = year;
-    this.cls = cls;
-    this.getCls = this.getCls.bind(this);
-  }
-  //non-lexicalEnvirroment
-  Stu.prototype.getName = function () {
-    return this.name;
-  };
-  Stu.prototype.getCls = function () {
-    return this.cls;
-  };
-  return Stu;
-}();
-var stu = new Stu("lee", 2, "A");
-console.log(stu.getName());
-var fnGetNmae = stu.getName;
-console.log(fnGetNmae.call(stu));
-//Excution Context -> 
-var fnGetYear = stu.getYaer;
-console.log(fnGetYear());
-var fnGetCls = stu.getCls;
-console.log(fnGetCls());
+//Json
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var jsonString = "{\n\"name\" : \"Lee taejoo\",\n\"age\" : 30,\n\"bloodType\" : \"B\"\n}\n";
+try {
+  var myJson = JSON.parse(jsonString);
+  console.log(_typeof(jsonString));
+  console.log(myJson);
+  console.log(JSON.stringify(myJson));
+} catch (error) {
+  console.log("正常に遷移できませんでした。最初からやりなおしてください。");
+}
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -175,7 +156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49408" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56365" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

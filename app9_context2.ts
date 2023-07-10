@@ -6,7 +6,7 @@ class Stu{
         this.name = name;
         this.year = year;
         this.cls = cls;
-        this.getCls= this.getCls.bind(this);
+        //this.getCls= this.getCls.bind(this);
     }
     //non-lexicalEnvirroment
     getName(){
