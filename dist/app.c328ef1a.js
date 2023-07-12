@@ -118,21 +118,58 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"app.js":[function(require,module,exports) {
-function main() {
-  var BUBBLING_PHASE = false;
-  var CAPTURING_PHASE = true;
-  var PHASE_NAME = ['NONE', 'CAPTURING', 'TARGET', 'BUBBLING'];
-  function eventLogger(_ref) {
-    var target = _ref.target,
-      currentTarget = _ref.currentTarget;
-    console.log("".concat(target.dataset.name, ", ").concat(currentTarget.dataset.name, ",").concat(PHASE_NAME(eventPhase)));
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var sourceObject = {
+  traits: {
+    first_name: {
+      value: 'Bob',
+      source_id: 1,
+      updated_at: 1623238587468
+    },
+    emails_opened_last_30_days: {
+      value: 33,
+      source_id: 2,
+      updated_at: 1623238601089
+    }
+  },
+  cursor: {
+    url: '/v1/spaces/lgJ4AAjFN4',
+    has_more: false,
+    next: ''
   }
-  var divs = document.querySelector('div');
-  divs.forEach(function (div) {
-    return div.addEventListener('click', eventLogger, BUBBLING_PHASE);
-  });
+};
+//deep copy
+var newObject1 = JSON.parse(JSON.stringify(sourceObject));
+//sheallow copy
+var newObject2 = Object.assign({}, sourceObject);
+var newObject3 = _objectSpread({}, sourceObject);
+console.log(sourceObject.traits.first_name.source_id); //1
+
+newObject1.traits.first_name.source_id = 100;
+console.log(sourceObject.traits.first_name.source_id); //1
+
+newObject2.traits.first_name.source_id = 200;
+console.log(sourceObject.traits.first_name.source_id); //100
+
+newObject3.traits.first_name.source_id = 300;
+console.log(sourceObject.traits.first_name.source_id); //300
+
+function deepCopyObject(obj) {
+  var clone = {};
+  for (var key in obj) {
+    if (_typeof(obj[key]) == "object" && obj[key] != null) {
+      clone[key] = deepCopyObject(obj[key]);
+    } else {
+      clone[key] = obj[key];
+    }
+  }
+  return clone;
 }
-document.addEventListener('DOMContentLoaded', main);
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -158,7 +195,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56365" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55662" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
